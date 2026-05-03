@@ -1,32 +1,36 @@
 
 
 def total_salary(path):
-    total_salary = 0
+    total = 0
     counter = 0
 
     try: #checking if file exists
-        with open(path, 'r', encoding='UTF-8') as f:
+        with open(path, 'r', encoding='utf-8') as f:
+
             for line in f: #file to list
                 try: #checking if formating is correct
                     name, salary = line.split(',')
-                    total_salary += int(salary)
+                    total += int(salary)
                     counter += 1
                 except ValueError:
-                    print (f"Wrong file formating in line {counter}: {line}")
+                    print(f"Wrong file formatting in line {counter}: {line}")
                     continue
+
         if counter == 0:
-            print ("There are no correct data in file")
+            print("There are no correct data in file")
             return None, None
         
-        average_salary = total_salary / counter
-        return total_salary, average_salary
+        average = total / counter
+        return total, average
     except FileNotFoundError:
-        print ("File not found")
+        print("File not found")
         return None, None
 
 
-#total, average = total_salary("Task1/salaries_wrong_format.txt") #testing wrong format file
-total, average = total_salary("Task1/salaries.txt") #testing correct file
+correct_salaries_list = "Task1/salaries.txt"
+wrong_salaries_list = "Task1/salaries_wrong_format.txt"
+
+total, average = total_salary(correct_salaries_list)
 if total is not None:
     print(f"Загальна сума заробітної плати: {total}, Середня заробітна плата: {average}")
 
