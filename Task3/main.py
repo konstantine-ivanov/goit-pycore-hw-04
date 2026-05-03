@@ -27,14 +27,21 @@ def coloring(folder, space=""): #folder parcing and items coloring
 
 
 def main():
-    if len(sys.argv) < 2:
-        print('No folder path entered')
-    if not path.exists():
-        print('No')        
-
+    if len(sys.argv) < 2: #check if path  entered
+        print(Fore.RED + 'No folder path entered')
+        sys.exit()
+    
     path = Path(sys.argv[1])
 
+    if not path.exists(): #check if path exists
+        print(Fore.RED + "Path does not exist")
+        sys.exit(1)
+    
+    if not path.is_dir(): #check if path is a directory
+        print(Fore.RED + "This is not a directory")
+        sys.exit(1)
 
+    coloring(path)
 
-
-coloring(Path('Task3/picture'))
+if __name__ == "__main__":
+    main()
